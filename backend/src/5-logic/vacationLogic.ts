@@ -26,6 +26,7 @@ async function addVacation(vacation:vacationModel): Promise<vacationModel>{
         const info:OkPacket = await dal.execute(sql)
         vacation.vacationId = info.insertId
         return vacation
+      
 }
 
 async function updateVacation(vacation:vacationModel): Promise<vacationModel>{

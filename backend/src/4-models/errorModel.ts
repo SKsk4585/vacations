@@ -11,3 +11,8 @@ export class ResouceNotFoundErrorModel extends ErrorModel{
         super(404,`the ${id} is not exists`)
     } 
 }
+export class validationErrorModel extends ErrorModel{
+    public constructor(msg:string){
+        super(400, msg)
+    } 
+}
