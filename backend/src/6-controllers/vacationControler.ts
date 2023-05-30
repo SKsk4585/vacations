@@ -1,6 +1,7 @@
 import express, { NextFunction, Request, Response } from "express"
 import vacationLogic from "../5-logic/vacationLogic"
 import VacationsModel from "../4-models/vacationModel"
+import deleteMessage from "../3-middleware/delete-message"
 
 
 const router = express.Router()
@@ -56,7 +57,7 @@ router.get("/vacations/:vacationId",async (request:Request,respons:Response,next
 
 
 //delete vacations 
-router.delete("/vacations/:vacationId",async (request:Request,respons:Response,next:NextFunction)=>{
+router.delete("/vacations/:vacationId",deleteMessage, async (request:Request,respons:Response,next:NextFunction)=>{
     try {
         const id = +request.params.vacationId
         await vacationLogic.deleteVacation(id)

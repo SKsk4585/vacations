@@ -19,6 +19,7 @@ async function register(user:UserModel) : Promise<string> {
                         '${user.password}',
                         'user'
                         )`
+    await dal.execute(sql)
          
     const token = cyber.getNewToken(user)
 
@@ -27,8 +28,8 @@ async function register(user:UserModel) : Promise<string> {
 
 async function login(credential:CredentialModel): Promise<string>{
     const sql = `SELECT * FROM users
-                 WHERE email = ${credential.email}
-                 AND password = ${credential.password}`
+                 WHERE email = '${credential.email}'
+                 AND password = '${credential.password}'`
     const user = await dal.execute(sql)
     if(!user[0]) throw new validationErrorModel("email or password incorrect")
 
@@ -45,7 +46,7 @@ async function databaseValidetion(data:string, dataName: string):Promise<boolean
 
     const resoult = await dal.execute(sql)
     const count = resoult[0].count
-    return count>0
+    return count > 0
 }
 
 export default{

@@ -6,15 +6,16 @@ import vacation from "./6-controllers/vacationControler"
 import authController from "./6-controllers/authController"
 
 
-
-
-
-
-
 const server = express()
+
 server.use(express.json())
+
 server.use("/api",vacation)
+
 server.use("/api",authController)
+
 server.use("*",routeNotFound)
+
 server.use(catchAll)
+
 server.listen(appConfig.port,(()=>console.log(`listen on port${appConfig.port}`)))

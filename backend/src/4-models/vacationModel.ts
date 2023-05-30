@@ -23,19 +23,19 @@ class VacationsModel{
     //joi
     public static validationSchema = Joi.object({
         vacationId : Joi.number().optional().positive().integer(),
-        dastination : Joi.string().required().min(2).max(100),
-        Description : Joi.string().required().min(2).max(300),
-        startDate : Joi.string().required().email().min(2).max(100),
-        endDate : Joi.string().required().min(2).max(300),
-        price : Joi.number().required().min(100).max(5000),
-        imageName : Joi.string().required(),
-                
-
+        destination : Joi.string().required().min(2).max(100),
+        description : Joi.string().required().min(2).max(300),
+        startDate : Joi.date().min('now').required(),
+        endDate : Joi.date().min(Joi.ref('startDate')).required(),
+        price : Joi.number().required().min(100).max(10000),
+        imageName : Joi.string().required()
     })
 
+    public validate() :string {
+        const result = VacationsModel.validationSchema.validate(this, {abortEarly: false})
+        return result.error?.message
+    }
    
 }
-
-
 
 export default VacationsModel

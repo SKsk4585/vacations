@@ -1,7 +1,7 @@
 import { OkPacket } from "mysql";
 import dal from "../2-utils/dal";
 import vacationModel from "../4-models/vacationModel";
-import { ResouceNotFoundErrorModel } from "../4-models/errorModel";
+import { ResouceNotFoundErrorModel, validationErrorModel } from "../4-models/errorModel";
 
 
 
@@ -14,6 +14,11 @@ async function getAllVacations(): Promise<vacationModel[]>{
 } 
 
 async function addVacation(vacation:vacationModel): Promise<vacationModel>{
+
+    //validation
+    const errors = vacation.validate()
+    if (errors) throw new validationErrorModel(errors)
+
     const sql = `INSERT INTO vacations 
                 VALUES(DEFAULT,
                     '${vacation.destination}',
@@ -30,6 +35,11 @@ async function addVacation(vacation:vacationModel): Promise<vacationModel>{
 }
 
 async function updateVacation(vacation:vacationModel): Promise<vacationModel>{
+    
+    //validation
+    const errors = vacation.validate()
+    if (errors) throw new validationErrorModel(errors)
+    
     const sql = `UPDATE vacations 
                  SET
                     destination = '${vacation.destination}',
