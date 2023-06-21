@@ -1,0 +1,62 @@
+.vacationCard {
+    display: inline-block;
+}
+
+.card {
+    margin: 20px;
+    width: 350px;
+    height: 350px;
+    background-color: rgba(255, 255, 255, 0.397) !important;
+    border-radius: 50px !important;
+}
+.description {
+    height: 70px;
+    overflow: auto;
+}
+
+.header {
+    font-family: 'Abril Fatface', cursive !important;
+    font-size: xx-large !important;
+    color: rgb(5, 62, 67);
+    text-shadow: 2px 2px 4px #5aadd4
+    
+}
+.description{
+    font-family: 'Dancing Script', cursive !important;
+    font-weight: 600 !important;
+    font-size: 30px !important;
+}
+
+.dialog {
+    height: fit-content !important;
+    background-image: linear-gradient(45deg, rgb(177, 166, 132),rgb(158, 208, 234), rgb(236, 231, 224), rgb(50, 134, 194)) !important;
+    border-radius:100px !important;
+
+}
+
+.date{
+    font-family: 'Geologica', sans-serif !important;
+    /* font-family: 'Libre Baskerville', serif !important; */
+    /* font-family: 'Geologica', sans-serif !important; */
+    text-shadow: 1px 1px 0 rgb(146, 92, 5), -1px -1px 0 rgb(17, 208, 39), 1px -1px 0 rgb(255, 214, 10), -1px 1px 0 rgb(20, 8, 113) !important;
+    color: rgb(113, 178, 232) !important;  
+    font-size: large !important;
+
+}
+.price{
+  
+    font-family: 'Geologica', sans-serif !important;
+    color: rgb(221, 227, 230) !important;
+    font-weight: 600 !important;
+    font-size: x-large !important;
+    text-shadow: 1px 1px 0 rgb(146, 92, 5), -1px -1px 0 rgb(17, 208, 39), 1px -1px 0 rgb(255, 214, 10), -1px 1px 0 rgb(20, 8, 113) !important;
+    /* text-shadow: 1px 1px 0 rgba(77, 58, 4, 0.415), -1px -1px 0 rgba(22, 26, 104, 0.336), 1px -1px 0 rgb(35, 16, 177), -1px 1px 0 rgb(23, 4, 195) !important; */
+   
+}
+.button{
+
+    background-color: rgba(177, 174, 26, 0) !important;
+    color: rgb(120, 200, 239) !important;
+    border-radius: 400px !important;
+    font-family: 'Geologica', sans-serif !important;
+}

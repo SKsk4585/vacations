@@ -2,6 +2,7 @@ import express, { NextFunction, Request, Response } from "express"
 import vacationLogic from "../5-logic/vacationLogic"
 import VacationsModel from "../4-models/vacationModel"
 import deleteMessage from "../3-middleware/delete-message"
+import path from "path"
 
 
 const router = express.Router()
@@ -20,6 +21,7 @@ router.get("/vacations",async (request:Request,respons:Response,next:NextFunctio
 //add vacacion
 router.post("/vacations",async (request:Request,respons:Response,next:NextFunction)=>{
     try {
+        request.body.image = request.files?.image
         const vacation = new VacationsModel(request.body)
         const addedvacation = await vacationLogic.addVacation(vacation)
         respons.status(201).json(addedvacation)
@@ -67,6 +69,20 @@ router.delete("/vacations/:vacationId",deleteMessage, async (request:Request,res
         next(error)        
     }
 })
+
+//get image
+router.get("/vacationsimage/:vacationId",async (request:Request,respons:Response,next:NextFunction)=>{
+    try {
+        const id = +request.params.vacationId
+        const imageName = await vacationLogic.getVacatioImages(id)
+        const image = path.join(__dirname,"..", "1-assets", "images", imageName)
+        respons.sendFile(image)
+    } 
+    catch (error) {
+        next(error)        
+    }
+})
+
 
 
 

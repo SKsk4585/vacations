@@ -1,0 +1,9 @@
+.vacationList {
+    height: 100vh;
+    background-image: url("../../../assets/images/list\ background1.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+	overflow: auto;
+    width: 100%;
+    
+}

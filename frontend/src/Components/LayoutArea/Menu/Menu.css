@@ -1,0 +1,16 @@
+.Menu > a {
+    font-size: 50px;
+    padding: 50px;
+    margin: 50px;
+    color: white;
+    font-family: 'Times New Roman', Times, serif;
+	
+}
+.Menu{
+    padding: 20px;
+}
+
+.Menu > .active{
+    font-size: 50px;
+    color: rgb(84, 228, 84);
+}

@@ -1,3 +1,4 @@
+import { UploadedFile } from "express-fileupload"
 import Joi from "joi"
 
 class VacationsModel{
@@ -7,6 +8,7 @@ class VacationsModel{
     public startDate: string
     public endDate: string
     public price: string
+    public image: UploadedFile
     public imageName: string
 
     public constructor(vacations: VacationsModel){
@@ -16,6 +18,7 @@ class VacationsModel{
         this.startDate = vacations.startDate
         this.endDate = vacations.endDate
         this.price = vacations.price
+        this.image = vacations.image
         this.imageName = vacations.imageName
      
     }
@@ -28,7 +31,8 @@ class VacationsModel{
         startDate : Joi.date().min('now').required(),
         endDate : Joi.date().min(Joi.ref('startDate')).required(),
         price : Joi.number().required().min(100).max(10000),
-        imageName : Joi.string().required()
+        image : Joi.object().required(),
+        imageName : Joi.optional()
     })
 
     public validate() :string {
