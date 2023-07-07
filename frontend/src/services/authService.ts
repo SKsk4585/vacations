@@ -9,8 +9,10 @@ class AuthService{
 public async  register(user:UserModel) : Promise<void> {
     const response = await axios.post<string> (appConfig.registerUrl, user)
     const token = response.data
+    
 
     authStore.dispatch({type:AuthActionType.register, payload:token})
+    console.log(authStore.getState())
 }
 
 
@@ -26,12 +28,8 @@ public logout() : void {
     authStore.dispatch({type:AuthActionType.logout})
 }
 
-
-
-
-
 }
 
+const authService = new AuthService()
 
-
-export default AuthService
+export default authService

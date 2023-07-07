@@ -8,17 +8,18 @@ class VacationsModel{
     public price: string
     public image: FileList
     public imageName: string
+    public isFollow: number
 
    public static destinationValidation = {
         required:{ value:true, message:"destination!!!"},
-        minlength: {value:5, message:"destination is too short"},
-        maxlength: {value:30, message:"destination is too long"}
+        minlength: {value:5, message:"Minimum 5 characters"},
+        maxlength: {value:30, message:"Maximum 30 characters"}
    }
 
    public static descriptionValidation = {
-        required:{ value:true, message:"description!!@"},
-        minlength: {value:5, message:"description is too short"},
-        maxlength: {value:400, message:"destination is too long"}
+        required:{ value:true, message:"description!!"},
+        minlength: {value:5, message:"Minimum 5 characters"},
+        maxlength: {value:400, message:"Maximum 30 characters"}
    } 
 
    public static startDateValidation = {
@@ -27,6 +28,10 @@ class VacationsModel{
         const now = new Date().toISOString()
         return value >= now || "The date has passed"
        }
+    } 
+    public static startDateUpdateValidation = {
+        required:{ value:true, message:"date!!!"},
+       
     } 
    
     public static endDateValidation = {
@@ -38,12 +43,10 @@ class VacationsModel{
 
     public static priceValidation = {
         required:{ value:true, message:"price!!!"},
-        min: {value:0, message: "price is too low"},
+        min: {value:100, message: "price is too low"},
         max: {value:10000, message: "price is too high"}  
     }
-    public static imageValidation = {
-        required:{ value:true, message:"image!!!"},
-    }
+
 }
 
 export default VacationsModel

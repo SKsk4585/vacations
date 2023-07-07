@@ -1,0 +1,15 @@
+.button{
+    
+    background-color: black !important;
+    color: rgb(5, 52, 76) !important;
+    /* border-radius: 400px !important; */
+    font-family: 'Dancing Script', cursive !important;
+    font-size: x-large !important;
+    text-shadow: 1px 1px 0 rgb(165, 82, 4) !important;
+    font-weight: 1000 !important;
+
+}
+.dialogBorder{
+
+    border: 1px solid black !important;
+}

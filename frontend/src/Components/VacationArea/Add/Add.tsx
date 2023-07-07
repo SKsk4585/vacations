@@ -22,8 +22,9 @@ function Add(): JSX.Element {
     }
 
     return (
+
         <div className="Add">
-			<form onSubmit={handleSubmit(send)}>
+			<form onSubmit={handleSubmit(send)} >
             <span className="errSpan">{formState.errors.destination?.message}</span>
                 <input type="text" {...register("destination",VacationsModel.destinationValidation)} placeholder="Destination"/>
                
@@ -42,13 +43,12 @@ function Add(): JSX.Element {
                 <input type="number"{...register("price", VacationsModel.priceValidation)} placeholder="price"/>
                 
                 <span className="errSpan">{formState.errors.image?.message}</span>
-                <input type="file" accept="image/*"{...register("image")} placeholder="image"/>
-                
+                <input type="file" accept="image/*"{...register("image")} placeholder="image"/>              
 
                 
 
 
-                <button className="butoon">SEND</button>
+                <button className="button">SEND</button>
             </form>
         </div>
     );

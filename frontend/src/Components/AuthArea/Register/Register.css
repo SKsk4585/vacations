@@ -1,3 +1,5 @@
-.Register {
-	
+.button{
+    background-color: rgba(0, 255, 255, 0) !important;
+    font-family: 'Geologica', sans-serif !important;
+    color:rgb(82, 101, 6) !important;
 }

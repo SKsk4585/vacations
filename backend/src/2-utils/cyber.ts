@@ -22,8 +22,7 @@ function verifyToken(request: Request): Promise<boolean>{
     return new Promise<boolean>((resolve,reject)=>{
         try {
             //extract Header
-            const header = request.header("authrization")
-
+            const header = request.headers.authorization
             //if not such header
             if(!header) {
                 resolve(false) // because jwt login
@@ -37,22 +36,19 @@ function verifyToken(request: Request): Promise<boolean>{
            if (!token){
             resolve(false)
             return
-
+           }
             //veify token
             jwt.verify(token, secretKey, error =>{
                 if (error){
                     resolve(false)
                     return
-
+                }
                     //here token must be legal
                     resolve(true)
                 }
-            })
-           }
-
-
-            
-        } 
+            )
+           }          
+        
         catch (err) {
             reject(err)            
         }

@@ -1,8 +1,51 @@
-.Header > h1 {
-    font-family:'Times New Roman', Times, serif;
-    font-size: xx-large;
-    color: white;
+.Header h1 {
+    text-decoration: none;  
+    color: rgb(64, 220, 207);
+    font-family: 'Libre Baskerville', serif;
     font-weight: bolder;
-
+    font-size: 30px;
+    text-shadow: 2px 2px 4px #053247;
+    text-align: center;
+    padding-right: 50px !important;
+    text-align: center;
 	
 }
+
+.Header {
+    display: flex;
+    background-image: transparent !important;
+
+}
+
+.user{
+    color: rgb(82, 201, 191);
+    font-family: 'Libre Baskerville', serif;
+    font-weight: bolder;
+    font-size: xx-large;
+    text-shadow: 2px 2px 4px #21a30d;
+    text-align: center;
+    padding-right: 50px !important;
+      
+}
+.admin {
+    color: rgb(82, 201, 191);
+    font-family: 'Libre Baskerville', serif;
+    font-weight: bolder;
+    font-size: xx-large;
+    text-shadow: 2px 2px 4px #21a30d;
+    text-align: center;
+    padding-right: 50px !important;     
+
+}
+.icon{    
+    color:white;
+    font-family: 'Libre Baskerville', serif;
+    font-weight: bolder;
+    font-size: large;    
+    text-align: center;
+}
+
+a{
+    margin: 20px;
+}
+

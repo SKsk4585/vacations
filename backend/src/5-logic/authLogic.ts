@@ -5,21 +5,24 @@ import { OkPacket } from "mysql";
 import dal from "../2-utils/dal";
 import { validationErrorModel } from "../4-models/errorModel";
 import CredentialModel from "../4-models/credentialModel";
+import RoleModel from "../4-models/roleModel";
 
 
 async function register(user:UserModel) : Promise<string> {
     //If email exists:
     if(await databaseValidetion(user.email,"email")) throw new validationErrorModel(`that ${user.email} already exsist`)
-    
+    user.role = RoleModel.User
     const sql = `INSERT INTO users 
                     VALUES(DEFAULT,
                         '${user.firstName}',
                         '${user.lastName}',
                         '${user.email}',
                         '${user.password}',
-                        'user'
+                        'User'
                         )`
-    await dal.execute(sql)
+    const info: OkPacket = await dal.execute(sql)
+
+    user.userId = info.insertId
          
     const token = cyber.getNewToken(user)
 

@@ -1,10 +1,18 @@
+import { useNavigate } from "react-router-dom";
 import UserModel from "../../../models/userModel";
+import authService from "../../../services/authService";
 import "./Register.css";
 import { useForm } from "react-hook-form";
 
+
 function Register(): JSX.Element {
-    async function send(){
+    const navigate = useNavigate()
+    async function send(user:UserModel): Promise<void>{
         try {
+            await authService.register(user)
+            alert("Welcome to our dream vacation world")   
+            navigate ("/all-vacations")
+
             
         } 
         catch (error) {
@@ -24,12 +32,12 @@ function Register(): JSX.Element {
                 <input type="text"{...register("lastName", UserModel.lastNameValidation)} placeholder="lastName"/>
                 
                 <span className="errSpan">{formState.errors.email?.message}</span>
-                <input type="date"{...register("email", UserModel.emailValidation)} placeholder="email"/>
+                <input type="email"{...register("email", UserModel.emailValidation)} placeholder="email"/>
                 
                 <span className="errSpan">{formState.errors.password?.message}</span>
-                <input type="date"{...register("password", UserModel.passwordValidation)} placeholder="password"/>
+                <input type="password"{...register("password", UserModel.passwordValidation)} placeholder="password"/>
                 
-                <button className="butoon">SEND</button>
+                <button className="button">SEND</button>
             </form>
         </div>
     );

@@ -24,19 +24,36 @@ class VacationsModel{
     }
 
     //joi
-    public static validationSchema = Joi.object({
+    public static AddValidationSchema = Joi.object({
         vacationId : Joi.number().optional().positive().integer(),
         destination : Joi.string().required().min(2).max(100),
-        description : Joi.string().required().min(2).max(300),
+        description : Joi.string().required().min(2).max(500),
         startDate : Joi.date().min('now').required(),
         endDate : Joi.date().min(Joi.ref('startDate')).required(),
         price : Joi.number().required().min(100).max(10000),
-        image : Joi.object().required(),
+        image : Joi.object().optional(),
         imageName : Joi.optional()
     })
 
-    public validate() :string {
-        const result = VacationsModel.validationSchema.validate(this, {abortEarly: false})
+    //joi
+    public static UpdateValidationSchema = Joi.object({
+        vacationId : Joi.number().optional().positive().integer(),
+        destination : Joi.string().required().min(2).max(100),
+        description : Joi.string().required().min(2).max(500),
+        startDate : Joi.date().required(),
+        endDate : Joi.date().min(Joi.ref('startDate')).required(),
+        price : Joi.number().required().min(100).max(10000),
+        image : Joi.object().optional(),
+        imageName : Joi.optional()
+    })
+
+    public addValidate() :string {
+        const result = VacationsModel.AddValidationSchema.validate(this, {abortEarly: false})
+        return result.error?.message
+    }
+
+    public updateValidate() :string {
+        const result = VacationsModel.UpdateValidationSchema.validate(this, {abortEarly: false})
         return result.error?.message
     }
    

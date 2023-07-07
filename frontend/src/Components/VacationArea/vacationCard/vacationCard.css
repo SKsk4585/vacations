@@ -5,9 +5,12 @@
 .card {
     margin: 20px;
     width: 350px;
-    height: 350px;
-    background-color: rgba(255, 255, 255, 0.397) !important;
-    border-radius: 50px !important;
+    height: 400px;
+    background-color: rgba(179, 216, 219, 0.719) !important;
+    border-radius: 0px 0px 50px 50px !important;
+    padding: 10px;
+    border: 2px solid rgb(132, 89, 4);
+    box-shadow: 2px 5px 6px green;
 }
 .description {
     height: 70px;
@@ -30,16 +33,14 @@
 .dialog {
     height: fit-content !important;
     background-image: linear-gradient(45deg, rgb(177, 166, 132),rgb(158, 208, 234), rgb(236, 231, 224), rgb(50, 134, 194)) !important;
-    border-radius:100px !important;
+    border-color:black !important;
 
 }
 
 .date{
     font-family: 'Geologica', sans-serif !important;
-    /* font-family: 'Libre Baskerville', serif !important; */
-    /* font-family: 'Geologica', sans-serif !important; */
-    text-shadow: 1px 1px 0 rgb(146, 92, 5), -1px -1px 0 rgb(17, 208, 39), 1px -1px 0 rgb(255, 214, 10), -1px 1px 0 rgb(20, 8, 113) !important;
-    color: rgb(113, 178, 232) !important;  
+    text-shadow: 1px 1px 0 rgb(165, 82, 4) !important;
+    color: rgb(12, 54, 89) !important;  
     font-size: large !important;
 
 }
@@ -49,9 +50,8 @@
     color: rgb(221, 227, 230) !important;
     font-weight: 600 !important;
     font-size: x-large !important;
-    text-shadow: 1px 1px 0 rgb(146, 92, 5), -1px -1px 0 rgb(17, 208, 39), 1px -1px 0 rgb(255, 214, 10), -1px 1px 0 rgb(20, 8, 113) !important;
-    /* text-shadow: 1px 1px 0 rgba(77, 58, 4, 0.415), -1px -1px 0 rgba(22, 26, 104, 0.336), 1px -1px 0 rgb(35, 16, 177), -1px 1px 0 rgb(23, 4, 195) !important; */
-   
+    text-shadow: 2px 2px 0 rgb(165, 82, 4) !important;
+    
 }
 .button{
 
@@ -59,4 +59,19 @@
     color: rgb(120, 200, 239) !important;
     border-radius: 400px !important;
     font-family: 'Geologica', sans-serif !important;
+}
+.dialogBorder{
+    background-color: transparent ;
+}
+
+.update {
+    color: rgb(3, 47, 44);
+    font-family: 'Libre Baskerville', serif;
+    font-weight: bolder;
+    font-size: large;    
+    text-align: center;
+}
+.delete{
+    background-color: transparent;
+    border: 0px;
 }

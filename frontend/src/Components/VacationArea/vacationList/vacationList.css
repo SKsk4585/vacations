@@ -1,9 +1,18 @@
 .vacationList {
     height: 100vh;
-    background-image: url("../../../assets/images/list\ background1.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
+  
 	overflow: auto;
     width: 100%;
     
+}
+
+.vacationList > .filters > button {
+    padding: 5px;
+    border-radius: 150px;
+    background-color: rgba(50, 198, 193, 0.947) ;
+    box-shadow: 2px 2px white;
+    border: 2px solid white;
+    margin: 10px;
+    font-family: 'Geologica', sans-serif !important;
+    color: rgb(18, 18, 128);
 }

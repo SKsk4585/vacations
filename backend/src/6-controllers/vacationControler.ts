@@ -3,14 +3,16 @@ import vacationLogic from "../5-logic/vacationLogic"
 import VacationsModel from "../4-models/vacationModel"
 import deleteMessage from "../3-middleware/delete-message"
 import path from "path"
+import verifyLoggedIn from "../3-middleware/verify-logged-in"
 
 
 const router = express.Router()
 
 //get all vacations
-router.get("/vacations",async (request:Request,respons:Response,next:NextFunction)=>{
+router.get("/vacations/:userId",verifyLoggedIn, async (request:Request,respons:Response,next:NextFunction)=>{
     try {
-        const vacation = await vacationLogic.getAllVacations()
+        const userId = +request.params.userId
+        const vacation = await vacationLogic.getAllVacations(userId)
         respons.json(vacation)
     } 
     catch (error) {
@@ -19,7 +21,7 @@ router.get("/vacations",async (request:Request,respons:Response,next:NextFunctio
 })
 
 //add vacacion
-router.post("/vacations",async (request:Request,respons:Response,next:NextFunction)=>{
+router.post("/vacations",verifyLoggedIn, async (request:Request,respons:Response,next:NextFunction)=>{
     try {
         request.body.image = request.files?.image
         const vacation = new VacationsModel(request.body)
@@ -32,9 +34,11 @@ router.post("/vacations",async (request:Request,respons:Response,next:NextFuncti
 })
 
 //update vacacion
-router.put("/vacations/:vacationId",async (request:Request,respons:Response,next:NextFunction)=>{
+router.put("/vacations/:vacationId",verifyLoggedIn, async (request:Request,respons:Response,next:NextFunction)=>{
     try {
         const id = +request.params.vacationId
+        request.body.image = request.files?.image
+
         const vacation = new VacationsModel(request.body)
         vacation.vacationId = id
         const addedvacation = await vacationLogic.updateVacation(vacation)
@@ -46,7 +50,7 @@ router.put("/vacations/:vacationId",async (request:Request,respons:Response,next
 })
 
 //get vacations by id
-router.get("/vacations/:vacationId",async (request:Request,respons:Response,next:NextFunction)=>{
+router.get("/vacation/:vacationId",verifyLoggedIn, async (request:Request,respons:Response,next:NextFunction)=>{
     try {
         const id = +request.params.vacationId
         const vacation = await vacationLogic.getVacationsById(id)
@@ -59,7 +63,7 @@ router.get("/vacations/:vacationId",async (request:Request,respons:Response,next
 
 
 //delete vacations 
-router.delete("/vacations/:vacationId",deleteMessage, async (request:Request,respons:Response,next:NextFunction)=>{
+router.delete("/vacations/:vacationId",deleteMessage,verifyLoggedIn, async (request:Request,respons:Response,next:NextFunction)=>{
     try {
         const id = +request.params.vacationId
         await vacationLogic.deleteVacation(id)
@@ -71,7 +75,7 @@ router.delete("/vacations/:vacationId",deleteMessage, async (request:Request,res
 })
 
 //get image
-router.get("/vacationsimage/:vacationId",async (request:Request,respons:Response,next:NextFunction)=>{
+router.get("/vacationsimage/:vacationId", async(request:Request,respons:Response,next:NextFunction)=>{
     try {
         const id = +request.params.vacationId
         const imageName = await vacationLogic.getVacatioImages(id)
@@ -83,9 +87,36 @@ router.get("/vacationsimage/:vacationId",async (request:Request,respons:Response
     }
 })
 
-
-
-
-
+//get vacations by user
+router.get("/vacationsByUser/:userId", async(request:Request,respons:Response,next:NextFunction)=>{
+    try {
+        const userId = +request.params.userId
+        const vacations = await vacationLogic.getVacationsByUser(userId)        
+        respons.json(vacations)
+    } 
+    catch (error) {
+        next(error)        
+    }
+})
+//get active vacations
+router.get("/activeVacations/", async(request:Request,respons:Response,next:NextFunction)=>{
+    try {
+        const vacations = await vacationLogic.getActiveVacations()        
+        respons.json(vacations)
+    } 
+    catch (error) {
+        next(error)        
+    }
+})
+//future vacation
+router.get("/futureVacation/", async(request:Request,respons:Response,next:NextFunction)=>{
+    try {
+        const vacations = await vacationLogic.getFutureVacation()        
+        respons.json(vacations)
+    } 
+    catch (error) {
+        next(error)        
+    }
+})
 
 export default router

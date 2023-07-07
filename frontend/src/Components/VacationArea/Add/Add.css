@@ -1,17 +1,20 @@
 form {
     position: absolute;
-    top:25%;
+    top: 25%;
     left: 35%;
     height: fit-content;
     width: 30%;
     text-align: center;
-    padding: 20px;	
+    padding: 20px;
+    /* border: 2px solid #2aa8bc;  */
+    border-radius: 50px;  
+    background-color: rgba(223, 102, 9, 0);    
 }
 
 input{
     width: 100%;
     margin-bottom: 20px;
-    background-color: rgba(115, 145, 184, 0);
+    background-color: rgba(5, 91, 202, 0.938);
 }
 
 .Add{
@@ -21,12 +24,14 @@ input{
 
 .button{
     background-color: rgba(0, 255, 255, 0) !important;
+    font-family: 'Geologica', sans-serif !important;
+    color:rgb(225, 229, 10) !important;
 }
 
 .errSpan{
     margin-top: -20px;
     margin-bottom: 2px;
-    color: red;
+    color: rgb(109, 114, 7) !important;
     font-size: large;
     font-weight:bolder ;
 }

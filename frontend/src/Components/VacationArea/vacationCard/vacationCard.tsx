@@ -2,54 +2,59 @@ import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';import VacationsModel from "../../../models/vacationModel";
-import appConfig from "../../../utils/Config";
+import Typography from '@mui/material/Typography';
+import VacationsModel from "../../../models/vacationModel";
 import "./vacationCard.css";
-import { forwardRef, useState } from 'react';
-import { TransitionProps } from '@mui/material/transitions';
-import { Slide } from '@mui/material';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
+import FollowButton from '../FollowButton/FollowButton';
+import DiscriptionButton from '../DiscriptionButton/DiscriptionButton';
+import { SyntheticEvent, useEffect, useState } from 'react';
+import UserModel from '../../../models/userModel';
+import { authStore } from '../../../redax/authState';
+import RoleModel from '../../../models/roleModel';
+import { NavLink, useNavigate } from 'react-router-dom';
+import vacationServices from '../../../services/vacationsServices';
+
 
 interface VacationCardProps {
 	vacation: VacationsModel
+    deleteVacation: (vacationId: number)=>void
 }
-const Transition = forwardRef(function Transition(
-    props: TransitionProps & {
-      children: React.ReactElement<any, any>;
-    },
-    ref: React.Ref<unknown>,
-  ) {
-    return <Slide direction="up" ref={ref} {...props} />;
-  });
 
-function VacationCard(props: VacationCardProps): JSX.Element {  
- 
-    const [open, setOpen] = useState(false);
+function VacationCard(props: VacationCardProps): JSX.Element { 
+    const navigate = useNavigate()
+    
+    const [user, setUser] = useState<UserModel>()
 
-    const handleClickOpen = () => {
-      setOpen(true);
-    };
-  
-    const handleClose = () => {
-      setOpen(false);
-    };
+    useEffect(()=>{
+        setUser(authStore.getState().user)
+
+        const unsubscribe = authStore.subscribe(()=>{
+            setUser(authStore.getState().user)
+        })
+
+        return ()=> unsubscribe()
+    },[user])
+    async function deleteVacation(){
+        try {
+            if(!window.confirm("Are you sure you want to delete?")) return
+            await vacationServices.deleteVacation(props.vacation.vacationId)
+            alert ("The deletion was successful") 
+            props.deleteVacation(props.vacation.vacationId)                       
+        } 
+        catch (error) {
+            console.log(error)            
+        }
+    }
 
     return (
         <div className="vacationCard">
             <Card sx={{ maxWidth: 345 }} className='card'>
-            <CardMedia
-                sx={{ height: 140 }}
-                image={appConfig.vacationImageUrl + props.vacation.vacationId}
-                title={props.vacation.destination}
-            />
-                <Typography gutterBottom variant="h5" component="div" className='header'>
-                    {props.vacation.destination}
-                </Typography>
+            <CardMedia>
+                <DiscriptionButton discription={props.vacation.description} destination={props.vacation.destination} vacationId={props.vacation.vacationId}/>
+                       
+            </CardMedia>
+
+
             <CardContent>
 
                 <Typography variant="body2" color="text.secondary" className='date'>
@@ -60,33 +65,29 @@ function VacationCard(props: VacationCardProps): JSX.Element {
                 </Typography>
             </CardContent>
             <CardActions>
-            <Button variant="outlined" onClick={handleClickOpen} className='button'>
-                about
-            </Button>
+                {user?.role === RoleModel.User && 
+            <FollowButton vacationId={props.vacation.vacationId} userId={user?.userId} isFollow={props.vacation.isFollow}  />
+                }
+                {user?.role === RoleModel.Admin && <>
+                    <NavLink to={"/update/"+props.vacation.vacationId}className={"update"}><span className="material-symbols-outlined">app_registration</span></NavLink>
+                    <button className={"delete"} onClick={deleteVacation}><span className="material-symbols-outlined">delete</span></button>
+                    </>
+                }           
+
             </CardActions>
-            </Card>
-
-            <Dialog
-        open={open}
-        TransitionComponent={Transition}
-        keepMounted
-        onClose={handleClose}
-        aria-describedby="alert-dialog-slide-description"
-      >
-        
-        <DialogContent className='dialog'>
-          <DialogContentText  id="alert-dialog-slide-description" className='description dialog'>
-            <span>{props.vacation.description}</span>
-
-          </DialogContentText>
-        </DialogContent>
-        
-      </Dialog>
+            </Card> 
 			
         </div>
     );
 }
 
 export default VacationCard;
+
+
+
+
+
+
+
 
 

@@ -1,0 +1,33 @@
+.CsvFile {
+	
+}
+/* CsvFile.css */
+.CsvFile {
+    text-align: center;
+  }
+  
+  h1 {
+    text-decoration: none;  
+    color: rgb(6, 66, 61);
+    font-family: 'Libre Baskerville', serif;
+    font-weight: bolder;
+    font-size: 30px;    
+    text-align: center;
+    padding-right: 30px !important;
+    
+}
+  
+  .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: rgb(6, 66, 61);;
+    color: #fff !important;
+    border-radius: 250px !important;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn:hover {
+    background-color: #0056b3;
+  }
+  
